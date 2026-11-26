@@ -3,7 +3,7 @@ from pathlib import Path
 import numpy as np
 from calibrate import scores, sources
 
-lines=[]; records=[]
+records=[]
 for arm,matrix in scores.items():
  rng=np.random.default_rng(2095)
  results={}
@@ -21,7 +21,7 @@ for arm,matrix in scores.items():
   v=np.asarray(r)*100
   mean=v.mean(axis=(0,2))
   records.append(('Bsm' if 'Bsm' in arm else 'A',target,rule,*mean))
-with Path(__file__).with_name('extra_calibration.csv').open('w') as f:
- w=csv.writer(f);w.writerow(['model','target','rule','original','bbc','story','recall']);w.writerows(records)
+with Path(__file__).with_name('extra_calibration.csv').open('w', newline='') as f:
+ w=csv.writer(f);w.writerow(['model','target','rule','original','bbc','bhaav','recall']);w.writerows(records)
 for a,t,r,*v in records:
  print(a,t,r,*[round(x,2) for x in v])

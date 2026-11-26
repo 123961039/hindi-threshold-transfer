@@ -49,7 +49,7 @@ def main():
                     lo, hi = np.quantile(by_draw, (.025, .975))
                     output.append([arm, budget, policy, metric, by_draw.mean(), lo, hi,
                                    *values[:, :, i].mean(axis=0)])
-    with Path(__file__).with_name('calibration_sensitivity.csv').open('w') as f:
+    with Path(__file__).with_name('calibration_sensitivity.csv').open('w', newline='') as f:
         w = csv.writer(f)
         w.writerow(['arm','budget','policy','evaluation_source','mean_pct',
                     'draw_p025_pct','draw_p975_pct','seed42_pct','seed123_pct','seed2024_pct'])
